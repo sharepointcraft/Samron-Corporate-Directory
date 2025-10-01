@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "CorporateDirectory",
+    "id": "f97dc2b4-4b14-4b5a-8225-45c61f168c4a",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.21.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "corporate-directory description"
+      },
+      "longDescription": {
+        "default": "corporate-directory description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "corporate-directory Feature",
+        "description": "The feature that activates elements of the corporate-directory solution.",
+        "id": "6cfb7f15-7fb4-4808-8229-a051de734140",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/corporate-directory.sppkg"
+  }
+}

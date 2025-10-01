@@ -1,0 +1,434 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.directoryContainer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.directoryTitle{
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  font-weight: 500;
+  //padding-left: 40%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f5f5f5;
+  color: #000;
+}
+.sidebar {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filterBox {
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.filterBox h3 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.filterButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  //max-height: 507px;
+  //padding-right: 5px;
+  max-height: 581px;
+}
+
+.filterButtons::-webkit-scrollbar {
+  width: 7px;
+}
+
+.filterButtons::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.filterButtons::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.filterButtons::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.filterButtons button {
+  background: #e0e0e0;
+  border: none;
+  padding: 8px 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.filterButtons button:hover {
+  background: #ccc;
+}
+
+.filterButtons .active {
+  background: #007bff;
+  color: white;
+}
+
+.mainContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.searchBox {
+  width: 98%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.alphabetFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+}
+
+.alphabetFilter button {
+  background: #ddd;
+  padding: 6px 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.alphabetFilter button:hover {
+  background: #ccc;
+}
+
+.alphabetFilter .active {
+  background: #007bff;
+  color: white;
+}
+
+.peopleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.personCard {
+  background: white;
+  //padding-left: 7px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 7px;
+  width: 300px;
+  box-sizing: border-box;
+  height: 140px;
+}
+
+.initials {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  width: 67px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.personDetails {
+  flex-grow: 1;
+}
+
+.personDetails h3 {
+  margin: 0;
+  font-size: 20px;
+  max-width: 220px;        /* restrict width */
+  white-space: nowrap;     /* keep text on one line */
+  overflow: hidden;        /* hide overflow text */
+  text-overflow: ellipsis; /* add ... */
+  display: block; 
+}
+
+.personDetails p {
+  margin: 0px 0;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 1px;
+}
+
+.personDetails svg {
+  margin-right: 5px;
+  color: #007bff;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  bottom: 20px;
+  left: 25%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  margin-left: 25%;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  align-items: center;
+}
+
+.pagination button {
+  background: #ddd;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.pagination button:hover {
+  background: #ccc;
+}
+
+.pagination .active {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.pagination span {
+  padding: 6px 12px;
+  color: #555;
+}
+.ellipsis {
+  padding: 0 10px;
+  color: #999;
+  cursor: default;
+}
+.noResult {
+  font-size: 1.2rem;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+.singleLine {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+.phoneLink {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: #0078d4; // Optional hover color
+  }
+}
+.clearFilter {
+  margin-top: 8px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
+}
+.searchContainer {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  margin-left: 27%;
+
+  .searchBox {
+    width: 100%;
+    padding: 10px 40px 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  .clearSearch {
+    position: absolute;
+    right: -31px;
+    top: 43%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 25px;
+    color: #999;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
+.clearButton {
+  background: #ff001f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 12px;
+  transition: .3s;
+  width: 96%;
+  margin-bottom: 10px;
+
+  &:hover {
+    background: #c90920;
+    color: white;
+  }
+}
+.filterButton {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s ease;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+.activeFilter {
+  background-color: #0078d4;
+  color: white;
+  border-color: #0078d4;
+}
+.directoryTitle {
+  /* Your existing styles */
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.instructionTooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover .tooltipContent {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.tooltipContent {
+  visibility: hidden;
+  width: 350px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 12px;
+  position: absolute;
+  z-index: 1000;
+  top: 125%;
+  left: 50%;
+  margin-left: -175px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  /* Arrow pointing up */
+  &::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #333 transparent;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+}
+/* 🔹 Responsive Adjustments */
+@media (max-width: 1024px) {
+  .peopleGrid {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  .directoryContainer {
+      overflow: scroll;
+  }
+}
+
+@media (max-width: 768px) {
+  .directoryContainer {
+      flex-direction: column;
+      align-items: center;
+  }
+  .tooltipContent {
+    width: 280px;
+    margin-left: -140px;
+    font-size: 12px;
+    left: auto;
+    right: 0;
+    margin-left: 0;
+    margin-right: -20px;
+  }
+  .sidebar {
+      width: 263px;
+      display: flex;
+      flex-direction: column;
+      //gap: 15px;
+      flex-direction: row;
+      overflow-x: auto;
+      justify-content: center;
+  }
+
+  .filterBox {
+      min-width: 150px;
+  }
+
+  .peopleGrid {
+      grid-template-columns: repeat(1, 1fr);
+  }
+}
