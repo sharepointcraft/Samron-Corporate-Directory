@@ -9,7 +9,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'CorporateDirectoryWebPartStrings';
-import CorporateDirectory from './components/CorporateDirectory';
+import { CorporateDirectory } from "./components/CorporateDirectory";
 import { ICorporateDirectoryProps } from './components/ICorporateDirectoryProps';
 
 export interface ICorporateDirectoryWebPartProps {
