@@ -3,8 +3,7 @@
   "id": "9b6c74d2-d458-42a9-9b7c-f6ccffcbbc6c",
   "alias": "CorporateDirectoryWebPart",
   "componentType": "WebPart",
-
-
+  
   "version": "*",
   "manifestVersion": 2,
 

@@ -8,15 +8,17 @@ import { HttpClient } from "@microsoft/sp-http";
 interface IPerson {
   FullName: string;
   Department: string;
+  Title: string;
+  Company: string;
   PhoneNumber: string;
   SecondaryPhone?: string;
   Email?: string;
   EXT?: string;
   Location: string;
-  Initials?: string;
   ProfileColor?: string;
   [key: string]: any;
 }
+
 
 const CorporateDirectory: React.FC<ICorporateDirectoryProps> = ({ context, documentLibrary, csvFile }) => {
   const [people, setPeople] = useState<IPerson[]>([]);
@@ -62,31 +64,34 @@ const CorporateDirectory: React.FC<ICorporateDirectoryProps> = ({ context, docum
         .split(/\r?\n/)
         .filter((line, idx) => idx > 0 && line.trim().length > 0);
 
-      const parsedPeople: IPerson[] = rows.map((row) => {
-        const cols = parseCSVRow(row);
-        const lastName = cols[0] || "";
-        const firstName = cols[1] || "";
-        const ext = cols[2] || "";
-        const department = cols[3] || "";
-        const primaryPhone = cols[4] || "";
-        const secondaryPhone = cols[5] || "";
-        const email = cols[6] || "";
+        const parsedPeople: IPerson[] = rows.map((row) => {
+          const cols = parseCSVRow(row);
+          const lastName = cols[0] || "";
+          const firstName = cols[1] || "";
+          const ext = cols[2] || "";
+          const department = cols[3] || "";
+          const title = cols[4] || "";
+          const company = cols[5] || "";
+          const primaryPhone = cols[6] || "";
+          const secondaryPhone = cols[7] || "";
+          const email = cols[8] || "";
 
-        const fullName = `${firstName} ${lastName}`.trim();
-        const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+          const fullName = `${firstName} ${lastName}`.trim();
 
-        return {
-          FullName: fullName,
-          PhoneNumber: primaryPhone,
-          SecondaryPhone: secondaryPhone,
-          Email: email,
-          EXT: ext,
-          Initials: initials,
-          Department: department,
-          Location: "",
-          ProfileColor: "", // Optional, you may assign colors here
-        };
-      });
+          return {
+            FullName: fullName,
+            Title: title,
+            Company: company,
+            PhoneNumber: primaryPhone,
+            SecondaryPhone: secondaryPhone,
+            Email: email,
+            EXT: ext,
+            Department: department,
+            Location: "",
+            ProfileColor: "",
+          };
+        });
+
 
       setPeople(parsedPeople.filter((p) => p.FullName));
     } catch (error) {
@@ -117,7 +122,9 @@ const CorporateDirectory: React.FC<ICorporateDirectoryProps> = ({ context, docum
       );
       const otherMatches = filtered.filter(person =>
         (
+          person.Title?.toLowerCase().includes(lowerSearch) ||
           person.Department?.toLowerCase().includes(lowerSearch) ||
+          person.Company?.toLowerCase().includes(lowerSearch) ||
           person.EXT?.toLowerCase().includes(lowerSearch) ||
           person.PhoneNumber?.toLowerCase().includes(lowerSearch) ||
           person.SecondaryPhone?.toLowerCase().includes(lowerSearch)
@@ -345,12 +352,12 @@ const printFilteredDirectory = (filteredPeople: IPerson[]) => {
   }
 
   th:first-child, td:first-child { width: 11%; }  /* FIRST */
-  th:nth-child(2), td:nth-child(2) { width: 11%; } /* LAST */
+  th:nth-child(2), td:nth-child(2) { width: 10%; } /* LAST */
   th:nth-child(3), td:nth-child(3) { width: 6%; }  /* EXT */
-  th:nth-child(4), td:nth-child(4) { width: 24%; } /* DEPARTMENT */
+  th:nth-child(4), td:nth-child(4) { width: 23%; } /* DEPARTMENT */
   th:nth-child(5), td:nth-child(5) { width: 13%; } /* COMPANY PHONE */
   th:nth-child(6), td:nth-child(6) { width: 13%; } /* CELL PHONE */
-  th:nth-child(7), td:nth-child(7) { width: 22%; } /* EMAIL */
+  th:nth-child(7), td:nth-child(7) { width: 24%; } /* EMAIL */
 
   @media print {
     html, body {
@@ -400,7 +407,7 @@ const printFilteredDirectory = (filteredPeople: IPerson[]) => {
                             <td>${firstName}</td>
                             <td>${lastName}</td>
                             <td>${p.EXT || ""}</td>
-                            <td>${p.Department || ""}</td>
+                            <td>${p.Title || ""}</td>
                             <td>${p.PhoneNumber || ""}</td>
                             <td>${p.SecondaryPhone || ""}</td>
                             <td>${p.Email || ""}</td>
@@ -458,14 +465,14 @@ const truncateText = (text: string, maxLength: number) => {
 const PersonCard: React.FC<{ person: IPerson }> = ({ person }) => (
   <div className={styles.personCard}>
     <div className={styles.initials} style={{ backgroundColor: person.ProfileColor }}>
-      {person.Initials}
+      {person.Company || "-"}
     </div>
 
     <div className={styles.personDetails}>
       <h3>{person.FullName}</h3>
 
-      {person.Department && (
-        <p className={styles.singleLine}>{truncateText(person.Department, 30)}</p>
+      {person.Title && (
+        <p className={styles.singleLine}>{truncateText(person.Title, 30)}</p>
       )}
 
       {person.EXT && (
@@ -495,6 +502,7 @@ const PersonCard: React.FC<{ person: IPerson }> = ({ person }) => (
     </div>
   </div>
 );
+
 
 interface FilterSectionProps {
   title: string;
